@@ -72,24 +72,36 @@ public class User implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return id == user.id;
+        return name.equals(user.name) &&
+                lastName.equals(user.lastName) &&
+                email.equals(user.email) &&
+                telephoneNumbers.equals(user.telephoneNumbers)&&
+                roles.equals(user.roles);
+
     }
 
     @Override
     public int hashCode() {
         final int prime = 31;
-        int result = id * prime;
+        int result = name.hashCode();
+        result = prime * result + (lastName ==null? 0: lastName.hashCode());
+        result = prime * result + (email ==null? 0: email.hashCode());
+        result = prime * result + (telephoneNumbers == null? 0: telephoneNumbers.hashCode());
+        result = prime * result + (roles == null? 0: roles.hashCode());
         return result;
+
     }
 
     @Override
     public String toString() {
-        return "id='" + id + '\'' +
-                "name='" + name + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", email='" + email + '\'' +
-                ", roles=" + roles +
-                ", telephoneNumbers=" + telephoneNumbers;
+        final StringBuilder sb = new StringBuilder();
+        sb.append("id=").append(id);
+        sb.append(", name='").append(name);
+        sb.append(", lastName=").append(lastName);
+        sb.append(", email=").append(email);
+        sb.append(", phones=").append(telephoneNumbers);
+        sb.append(", roles=").append(roles);
+        return sb.toString();
     }
 
     public static class Builder {
